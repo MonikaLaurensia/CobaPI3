@@ -1,48 +1,72 @@
 <?php
-require 'functions.php';
 
-$pasien = query("SELECT * FROM pasien");
+require "functions.php";
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Pasien</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="utf-8">
+  <title>FORM TAMBAH PASIEN</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head>
 <body>
+  <div class="header">
+    <div class="header-left">Sistem Informasi Klinik</div>
+    <div class="header-right">
+      <ul>
+        <li>Home</li>
+        <li class="selected">Pasien</li>
+        <li>Dokter</li>
+      </ul>
+    </div>
+  </div>
 
-<h1>Data Pasien</h1>
+  <div class="main">
+    <div class="pasien-form">
+      <div class="form-title">Form Tambah Pasien</div>
+      <form method="post" action="">
+        <div class="form-item">Field dengan (*) wajib diisi</div>
 
-<table border="1" cellpadding="10" cellspacing="0">
+        <div class="form-item"><label for = "no_rk">No Rekam Medis* </label></div> 
+        <input type="text" name="no_rk" id = "no_rk" required>
 
-		<tr>			
-			<th>NO_RK</th>
-			<th>Name</th>
-			<th>Gender</th>
-			<th>Age</th>
-			<th>NO_HP</th>
-			<th>Address</th>
-			<th>Poli</th>
-			<th>Action</th>
-		</tr>
+        <div class="form-item"><label for = "name">Nama*</label></div> 
+        <input type="text" name="name" id ="name" required>
 
-			<?php $i = 'A0001'; ?>
-			<?php foreach( $pasien as $row): ?>
-			<tr>
-				<td><?= $i; ?></td>
-				<td><?= $row["name"]; ?></td>
-				<td><?= $row["gender"]; ?></td>
-				<td><?= $row["age"]; ?></td>
-				<td><?= $row["no_hp"]; ?></td>
-				<td><?= $row["address"]; ?></td>
-				<td><?= $row["poli"]; ?></td>
+        <div class="form-item">Jenis Kelamin*</div>
+        <input type="radio" id="pria" name="gender" value="pria"><label for="pria">Pria</label>
+        <input type="radio" id="wanita" name="gender" value="wanita"><label for="pria">Wanita</label>
+        
 
-				<td>
-					<a href="">Edit</a>	|
-					<a href="">Delete</a>
-				</td>
-		
-		</tr>
-		<?php $i++; ?>
-	<?php endforeach; ?>
+        <div class="form-item"><label for ="age">Umur*</label></div>
+        <input type="text" name="age" id="age" required>
+          
+        <div class="form-item"><label for = "no_hp">Nomor Handphone*</label></div>
+        <input type="text" name="no_hp" id="no_hp" required >
+  
+        <div class="form-item"><label for = "address">Alamat</label></div>
+        <textarea name="body" id="address"></textarea> 
+
+        <div class="form-item">Poli
+        <?php 
+          $types = array('Poli Umum', 'Poli Gigi');
+         ?>
+        <!-- Write the <select> tag below -->
+        <select name="poli">
+          <option value="unselected">Pilih Poli</option>
+           <?php
+             foreach ($types as $type) {
+              echo "<option value='{$type}'>{$type}</option>";
+             }
+           ?>
+
+        </select>   </div>
+
+        <input type="submit" value="Submit" name="submit">
+      </form>
+    </div>
+  </div>
+  
+</body>
 </html>
